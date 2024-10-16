@@ -53,11 +53,11 @@ function getCircleCircumference(radius) {
  *  10, 0  => 5
  *  -3, 3  => 0
  */
-function getAverage(value1, value2) {
-  // throw new Error('Not implemented');
-  const n1 = Math.min(value1, value2);
-  const n2 = Math.max(value1, value2);
-  return (n1 + (n2 - n1) / 2) / 2;
+function getAverage(/* value1, value2 */) {
+  throw new Error('Not implemented');
+  // const n1 = Math.min(value1, value2);
+  // const n2 = Math.max(value1, value2);
+  // return (n1 + (n2 - n1) / 2) / 2;
 }
 
 /**
@@ -150,10 +150,10 @@ function getLastDigit(value) {
  *     '37'     => 37
  * '-525.5'     => -525.5
  */
-function parseNumberFromString(value) {
-  // throw new Error('Not implemented');
-  return Number.parseFloat(value) > Number.parseInt(value, 10)
-    ? Number.parseFloat(value) : Number.parseInt(value, 10);
+function parseNumberFromString(/* value */) {
+  throw new Error('Not implemented');
+  // return Number.parseFloat(value) > Number.parseInt(value, 10)
+  //   ? Number.parseFloat(value) : Number.parseInt(value, 10);
 }
 
 /**
