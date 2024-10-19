@@ -227,8 +227,17 @@ function findFirstSingleChar(str) {
  *   5, 3, true, true   => '[3, 5]'
  *
  */
-function getIntervalString(/* a, b, isStartIncluded, isEndIncluded */) {
-  throw new Error('Not implemented');
+function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
+  // throw new Error('Not implemented');
+  let result = '';
+  const max = Math.max(a, b);
+  const min = Math.min(a, b);
+  if (isStartIncluded) result += '[';
+  else result += '(';
+  result += `${min}, ${max}`;
+  if (isEndIncluded) result += ']';
+  else result += ')';
+  return result;
 }
 
 
@@ -244,8 +253,13 @@ function getIntervalString(/* a, b, isStartIncluded, isEndIncluded */) {
  * 'rotator' => 'rotator'
  * 'noon' => 'noon'
  */
-function reverseString(/* str */) {
-  throw new Error('Not implemented');
+function reverseString(str) {
+  // throw new Error('Not implemented');
+  let result = '';
+  for (let i = str.length - 1; i >= 0; i -= 1) {
+    result += str[i];
+  }
+  return result;
 }
 
 
@@ -261,8 +275,14 @@ function reverseString(/* str */) {
  *   87354 => 45378
  *   34143 => 34143
  */
-function reverseInteger(/* num */) {
-  throw new Error('Not implemented');
+function reverseInteger(num) {
+  // throw new Error('Not implemented');
+  let result = '';
+  const str = num.toString();
+  for (let i = str.length - 1; i >= 0; i -= 1) {
+    result += str[i];
+  }
+  return parseInt(result, 10);
 }
 
 
@@ -304,8 +324,21 @@ function isCreditCardNumber(/* ccn */) {
  *   10000 ( 1+0+0+0+0 = 1 ) => 1
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
-function getDigitalRoot(/* num */) {
-  throw new Error('Not implemented');
+function getDigitalRoot(num) {
+  // throw new Error('Not implemented');
+  let str = num.toString();
+  let sum = 0;
+  for (let i = 0; i < str.length; i += 1) {
+    sum += parseInt(str[i], 10);
+  }
+  while (sum > 9) {
+    str = sum.toString();
+    sum = 0;
+    for (let i = 0; i < str.length; i += 1) {
+      sum += parseInt(str[i], 10);
+    }
+  }
+  return sum;
 }
 
 
@@ -395,8 +428,10 @@ function getCommonDirectoryPath(/* pathes */) {
  *                         [ 6 ]]
  *
  */
-function getMatrixProduct(/* m1, m2 */) {
-  throw new Error('Not implemented');
+function getMatrixProduct(m1, m2) {
+  // throw new Error('Not implemented');
+  let result = [];
+  
 }
 
 
@@ -430,10 +465,26 @@ function getMatrixProduct(/* m1, m2 */) {
  *    [    ,   ,    ]]
  *
  */
-function evaluateTicTacToePosition(/* position */) {
-  throw new Error('Not implemented');
+function evaluateTicTacToePosition(position) {
+  // throw new Error('Not implemented');
+  if (position[0][0] !== undefined && position[0][0] === position[0][1]
+    && position[0][1] === position[0][2]) return position[0][0];
+  if (position[1][0] !== undefined && position[1][0] === position[1][1]
+    && position[1][1] === position[1][2]) return position[1][0];
+  if (position[2][0] !== undefined && position[2][0] === position[2][1]
+    && position[2][1] === position[2][2]) return position[2][0];
+  if (position[0][0] !== undefined && position[0][0] === position[1][0]
+    && position[1][0] === position[2][0]) return position[0][0];
+  if (position[0][1] !== undefined && position[0][1] === position[1][1]
+    && position[1][1] === position[2][1]) return position[0][1];
+  if (position[0][2] !== undefined && position[0][2] === position[1][2]
+    && position[1][2] === position[2][2]) return position[0][2];
+  if (position[0][0] !== undefined && position[0][0] === position[1][1]
+    && position[1][1] === position[2][2]) return position[0][0];
+  if (position[2][0] !== undefined && position[2][0] === position[1][1]
+    && position[1][1] === position[0][2]) return position[2][0];
+  return undefined;
 }
-
 
 module.exports = {
   getFizzBuzz,
