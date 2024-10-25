@@ -214,8 +214,23 @@ function extractEmails(str) {
  *             '└──────────┘\n'
  *
  */
-function getRectangleString(/* width, height */) {
-  throw new Error('Not implemented');
+function getRectangleString(width, height) {
+  // throw new Error('Not implemented');
+  let result = '';
+  for (let i = 0; i < height; i += 1) {
+    for (let j = 0; j < width; j += 1) {
+      if (i === 0 && j === 0) result += '┌';
+      else if (i !== 0 && i !== height - 1 && j === 0) result += '│';
+      else if (i === height - 1 && j === 0) result += '└';
+      else if ((i === 0 || i === height - 1) && j !== 0 && j !== width - 1) result += '─';
+      else if (i === 0 && j === width - 1) result += '┐';
+      else if (i !== 0 && i !== height - 1 && j === width - 1) result += '│';
+      else if (i === height - 1 && j === width - 1) result += '┘';
+      else result += ' ';
+    }
+    result += '\n';
+  }
+  return result;
 }
 
 
@@ -235,8 +250,47 @@ function getRectangleString(/* width, height */) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
+function encodeToRot13(str) {
+  // throw new Error('Not implemented');
+  const hm = new Map();
+  hm.set('A', 'N');
+  hm.set('B', 'O');
+  hm.set('C', 'P');
+  hm.set('D', 'Q');
+  hm.set('E', 'R');
+  hm.set('F', 'S');
+  hm.set('G', 'T');
+  hm.set('H', 'U');
+  hm.set('I', 'V');
+  hm.set('J', 'W');
+  hm.set('K', 'X');
+  hm.set('L', 'Y');
+  hm.set('M', 'Z');
+  hm.set('N', 'A');
+  hm.set('O', 'B');
+  hm.set('P', 'C');
+  hm.set('Q', 'D');
+  hm.set('R', 'E');
+  hm.set('S', 'F');
+  hm.set('T', 'G');
+  hm.set('U', 'H');
+  hm.set('V', 'I');
+  hm.set('W', 'J');
+  hm.set('X', 'K');
+  hm.set('Y', 'L');
+  hm.set('Z', 'M');
+  let result = '';
+  for (let i = 0; i < str.length; i += 1) {
+    let tmp;
+    if (str[i] === ' ' || str[i] === '!' || str[i] === '?') {
+      tmp = str[i];
+    } else {
+      tmp = hm.get(str[i]);
+      if (tmp === undefined) tmp = hm.get(str[i].toUpperCase()).toLowerCase();
+    }
+    result += tmp;
+  }
+  return result;
 }
 
 /**
