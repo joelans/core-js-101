@@ -53,11 +53,12 @@ function getCircleCircumference(radius) {
  *  10, 0  => 5
  *  -3, 3  => 0
  */
-function getAverage(/* value1, value2 */) {
-  throw new Error('Not implemented');
+function getAverage(value1, value2) {
+  // throw new Error('Not implemented');
   // const n1 = Math.min(value1, value2);
   // const n2 = Math.max(value1, value2);
-  // return (n1 + (n2 - n1) / 2) / 2;
+  // return n1 + (n2 / 2.0 - n1 / 2.0);
+  return value1 / 2.0 + value2 / 2.0;
 }
 
 /**
@@ -116,8 +117,9 @@ function getLinearEquationRoot(a, b) {
  *   (0,1) (0,1)     => 0
  *   (0,1) (1,2)     => 0
  */
-function getAngleBetweenVectors(/* x1, y1, x2, y2 */) {
-  throw new Error('Not implemented');
+function getAngleBetweenVectors(x1, y1, x2, y2) {
+  // throw new Error('Not implemented');
+  return Math.acos((x1 * x2 + y1 * y2) / ((x1 ** 2 + y1 ** 2) ** 0.5 * (x2 ** 2 + y2 ** 2) ** 0.5));
 }
 
 /**
@@ -150,10 +152,9 @@ function getLastDigit(value) {
  *     '37'     => 37
  * '-525.5'     => -525.5
  */
-function parseNumberFromString(/* value */) {
-  throw new Error('Not implemented');
-  // return Number.parseFloat(value) > Number.parseInt(value, 10)
-  //   ? Number.parseFloat(value) : Number.parseInt(value, 10);
+function parseNumberFromString(value) {
+  // throw new Error('Not implemented');
+  return parseFloat(value);
 }
 
 /**
@@ -169,8 +170,9 @@ function parseNumberFromString(/* value */) {
  *   3,3,3   => 5.196152422706632
  *   1,2,3   => 3.741657386773941
  */
-function getParallelepipedDiagonal(/* a, b, c */) {
-  throw new Error('Not implemented');
+function getParallelepipedDiagonal(a, b, c) {
+  // throw new Error('Not implemented');
+  return (a ** 2 + b ** 2 + c ** 2) ** 0.5;
 }
 
 
@@ -191,8 +193,31 @@ function getParallelepipedDiagonal(/* a, b, c */) {
  *   1678, 2  => 1700
  *   1678, 3  => 2000
  */
-function roundToPowerOfTen(/* num, pow */) {
-  throw new Error('Not implemented');
+function roundToPowerOfTen(num, pow) {
+  // throw new Error('Not implemented');
+  if (pow === 0) return num;
+  let k = pow;
+  const arr = num.toString().split('').reverse();
+  for (let i = 0; i < arr.length; i += 1) {
+    arr[i] = parseInt(arr[i], 10);
+  }
+  if (arr[k - 1] > 5) {
+    arr[k - 1] = 0;
+    arr[k] += 1;
+    k -= 1;
+    while (k - 1 >= 0) {
+      arr[k - 1] = 0;
+      k -= 1;
+    }
+  } else {
+    arr[k - 1] = 0;
+    k -= 1;
+    while (k - 1 >= 0) {
+      arr[k - 1] = 0;
+      k -= 1;
+    }
+  }
+  return arr.reverse().join('');
 }
 
 /**
@@ -212,8 +237,14 @@ function roundToPowerOfTen(/* num, pow */) {
  *   16 => false
  *   17 => true
  */
-function isPrime(/* n */) {
-  throw new Error('Not implemented');
+function isPrime(n) {
+  // throw new Error('Not implemented');
+  let i = 2;
+  while (i < n) {
+    if (n % i === 0) return false;
+    i += 1;
+  }
+  return true;
 }
 
 /**
@@ -231,8 +262,15 @@ function isPrime(/* n */) {
  *   toNumber(42, 0) => 42
  *   toNumber(new Number(42), 0) => 42
  */
-function toNumber(/* value, def */) {
-  throw new Error('Not implemented');
+function toNumber(value, def) {
+  // throw new Error('Not implemented');
+  if (typeof value === 'number') return value;
+  if (typeof value === 'string') {
+    if (Number.isNaN(parseInt(value, 10))) return def;
+    return parseInt(value, 10);
+  }
+  if (typeof value === 'object' && value !== null) return parseInt(value, 10);
+  return def;
 }
 
 module.exports = {
